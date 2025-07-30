@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.Files" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/yellow</item>
+
+
+    </style>
+
+    <style name="Theme.Files" parent="Base.Theme.Files" />
+
+    <style name="toobar" parent="Widget.AppCompat.Toolbar">
+
+        <item name="fontFamily">@font/bold_lato</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="android:gravity">center_vertical</item>
+
+    </style>
+</resources>
