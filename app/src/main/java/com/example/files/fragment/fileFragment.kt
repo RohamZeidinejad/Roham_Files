@@ -2,6 +2,8 @@ package com.example.files.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,10 +19,10 @@ import com.example.files.activity.MainActivity
 import com.example.files.adapter.FileAdapter
 import com.example.files.adapter.FileEvents
 import com.example.files.R
-import com.example.files.databinding.AddFileDialogBinding
-import com.example.files.databinding.AddFolderDialogBinding
+import com.example.files.databinding.DialogAddFileBinding
+import com.example.files.databinding.DialogAddFolderBinding
+import com.example.files.databinding.DialogRemoveBinding
 import com.example.files.databinding.FragmentFileBinding
-import com.example.files.databinding.RemoveFileOrFolderDialogBinding
 import java.io.File
 
 class fileFragment(val path: String) : Fragment(), FileEvents {
@@ -72,10 +74,12 @@ class fileFragment(val path: String) : Fragment(), FileEvents {
         binding.icAddFolder.setOnClickListener {
 
             val dialog = AlertDialog.Builder(requireContext()).create()
-            val dialogBinding = AddFolderDialogBinding.inflate(layoutInflater)
+            val dialogBinding = DialogAddFolderBinding.inflate(layoutInflater)
             dialog.setView(dialogBinding.root)
             dialog.setCancelable(true)
             dialog.show()
+
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
             dialogBinding.addFolderCancel.setOnClickListener {
 
@@ -108,10 +112,12 @@ class fileFragment(val path: String) : Fragment(), FileEvents {
         binding.icAddFile.setOnClickListener {
 
             val dialog = AlertDialog.Builder(requireContext()).create()
-            val dialogBinding = AddFileDialogBinding.inflate(layoutInflater)
+            val dialogBinding = DialogAddFileBinding.inflate(layoutInflater)
             dialog.setView(dialogBinding.root)
             dialog.setCancelable(true)
             dialog.show()
+
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
             dialogBinding.addFileCancel.setOnClickListener {
 
@@ -202,18 +208,20 @@ class fileFragment(val path: String) : Fragment(), FileEvents {
     override fun onFolderOrFileLongClicked(file: File, position: Int) {
 
         val dialog = AlertDialog.Builder(requireContext()).create()
-        val dialogBinding = RemoveFileOrFolderDialogBinding.inflate(layoutInflater)
+        val dialogBinding = DialogRemoveBinding.inflate(layoutInflater)
         dialog.setView(dialogBinding.root)
         dialog.setCancelable(true)
         dialog.show()
 
-        dialogBinding.removeFolderOrFileCancel.setOnClickListener {
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialogBinding.removeCancel.setOnClickListener {
 
             dialog.dismiss()
 
         }
 
-        dialogBinding.removeFolderOrFileDone.setOnClickListener {
+        dialogBinding.removeDone.setOnClickListener {
 
             file.deleteRecursively()
             fileAdapter.removeFileOrFolder(file, position)
